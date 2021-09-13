@@ -23,6 +23,7 @@ html, body {
     text-align: center;
 }
 
+
 .bg-primary {
     background-color: var(--color-primary) !important;
 }
