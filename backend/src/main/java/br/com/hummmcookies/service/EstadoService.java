@@ -23,7 +23,7 @@ public class EstadoService {
 	}
 	public List<Estado> findAll()
 	{
-		return repo.findAllByOrderByNome();
+		return repo.findAll();
 	}
 	
 	

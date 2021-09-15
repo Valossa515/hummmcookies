@@ -11,5 +11,5 @@ import br.com.hummmcookies.domain.Estado;
 @Repository
 public interface EstadoRepository extends JpaRepository<Estado, Integer>{
 	@Transactional(readOnly = true)
-	public List<Estado> findAllByOrderByNome();
+	public List<Estado> findAllByOrderByName();
 }

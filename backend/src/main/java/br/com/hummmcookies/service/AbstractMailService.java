@@ -10,19 +10,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import br.com.hummmcookies.domain.Cliente;
 import br.com.hummmcookies.domain.Pedido;
 
-
+@Service
 public abstract class AbstractMailService implements EmailService {
 	
 	@Value("${default.sender}")
 	private String sender;
 	
-
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
