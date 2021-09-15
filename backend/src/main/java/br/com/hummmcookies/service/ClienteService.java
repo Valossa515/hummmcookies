@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,16 +36,11 @@ public class ClienteService
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private BCryptPasswordEncoder pe;
-	@Autowired
-	@Value("${img.prefix.cleint.profile}")
-	private String prefix;
-	@Value("${img.profile.size}")
-	private Integer size;
 	public Cliente find(Integer id) {
 		UserSS user = UserService.authenticated();
 		
 		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-			throw new AuthorizationException("Acesso negado");
+			throw new AuthorizationException("Acesso negado!!!");
 		}
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -75,7 +69,7 @@ public class ClienteService
 		}
 		catch(DataIntegrityViolationException e)
 		{
-			throw new DataIntegrityException("Não é possível excluir porque há pedidos relacionadas");
+			throw new DataIntegrityException("Não é possível excluir porque há pedidos relacionadas!!!");
 		}
 	}
 	public List<Cliente> findAll() 
@@ -86,7 +80,7 @@ public class ClienteService
 	public Cliente findByEmail(String email) {
 		UserSS user = UserService.authenticated();
 		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
-			throw new AuthorizationException("Acesso negado");
+			throw new AuthorizationException("Acesso negado!!!");
 		}
 	
 		Cliente obj = repo.findByEmail(email);
