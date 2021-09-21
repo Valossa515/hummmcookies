@@ -1,5 +1,7 @@
 {
-  "name": "hummmcookies",
-  "integrations": {},
+  "name": "frontend",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
