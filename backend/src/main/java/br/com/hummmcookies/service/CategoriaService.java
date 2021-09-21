@@ -2,6 +2,7 @@ package br.com.hummmcookies.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,6 +28,10 @@ public class CategoriaService
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+	}
+	public List<CategoriaDTO> find2(){
+		List<Categoria> result = findAll();
+		return result.stream().map(x -> new CategoriaDTO(x)).collect(Collectors.toList());
 	}
 	public Categoria insert(Categoria obj)
 	{
@@ -56,6 +61,7 @@ public class CategoriaService
 	{
 		return repo.findAll();
 	}
+	
 	
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.hummmcookies.domain.Categoria;
+import br.com.hummmcookies.domain.Cidade;
 import br.com.hummmcookies.domain.Produto;
 import br.com.hummmcookies.repositories.CategoriaRepository;
 import br.com.hummmcookies.repositories.ProdutoRepository;
@@ -23,7 +24,8 @@ public class ProdutoService
 	private ProdutoRepository repo;
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-	
+	@Autowired
+	private CategoriaService categoriaService;
 	public Produto find(Integer id) {
 		Optional<Produto> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -36,5 +38,12 @@ public class ProdutoService
 		List<Categoria> categorias = categoriaRepository.findAllById(idx);
 		return repo.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);
 		
+	}
+	@SuppressWarnings("unchecked")
+	public Produto insert(Produto obj) {
+		obj.setId(null);
+		obj.setCategorias((List<Categoria>) categoriaService.find(obj.getId()));
+		obj = repo.save(obj);
+		return obj;
 	}
 }

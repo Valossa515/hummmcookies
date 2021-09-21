@@ -22,7 +22,7 @@ public class CidadeService {
 	private CidadeRepository repo;
 	@Autowired
 	private EstadoService estadoService;
-
+	
 	public List<Cidade> findByEstado(Integer estadoId) {
 		return repo.findCidades(estadoId);
 	}
