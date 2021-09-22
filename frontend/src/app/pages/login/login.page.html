@@ -5,6 +5,20 @@
     </ion-buttons>
     <ion-title>Login</ion-title>
   </ion-toolbar>
+  <form>
+    <ion-item>
+         <ion-label stacked>Email</ion-label>
+         <ion-input [(ngModel)] = "cred.email" name = "email" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+     <ion-label stacked>Senha</ion-label>
+     <ion-input [(ngModel)] = "cred.senha" name = "senha" type="password"></ion-input>
+    </ion-item>
+
+   <button ion-button block (click)="login()" >Entrar</button>
+   <button ion-button block outline (click) = "signup()">Registrar</button>
+ </form>
 </ion-header>
 
 <ion-content class="ion-padding">
